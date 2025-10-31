@@ -6,8 +6,8 @@ set -euo pipefail
 NUM_FILES=${NUM_FILES:-2}
 OUTPUT_DIR=${OUTPUT_DIR:-"$(pwd)/padding_outputs"}
 PADDING_SIZE=${PADDING_SIZE:-67108864}  # 64MB = 64 * 1024 * 1024
-SDK_PATH=${SDK_PATH:-$(xcrun --sdk iphoneos --show-sdk-path)}
-TARGET=${TARGET:-"arm64-apple-ios15.0"}
+SDK_PATH=${SDK_PATH:-$(xcrun --sdk macosx --show-sdk-path)}
+TARGET=${TARGET:-"arm64-apple-macos15.0"}
 
 # Usage function
 usage() {
@@ -20,8 +20,8 @@ OPTIONS:
     -n, --num-files NUM      Number of padding files to generate (default: 2)
     -o, --output-dir DIR     Output directory for padding files and .o files (default: ./padding_outputs)
     -p, --padding-size SIZE  Size of padding in bytes (default: 67108864 = 64MB)
-    -s, --sdk PATH           Path to SDK (default: iPhone SDK)
-    --target TRIPLE          Target triple (default: arm64-apple-ios15.0)
+    -s, --sdk PATH           Path to SDK (default: macOS SDK)
+    --target TRIPLE          Target triple (default: arm64-apple-macos15.0)
     -h, --help               Show this help message
 
 EXAMPLES:
@@ -36,7 +36,7 @@ EXAMPLES:
     $0 -n 2 -p 67108864 -o /tmp/padding_test
 
     # Specify target
-    $0 --num-files 2 --padding-size 67108864 --target arm64-apple-ios16.0
+    $0 --num-files 2 --padding-size 67108864 --target arm64-apple-macos15.0
 EOF
     exit 0
 }

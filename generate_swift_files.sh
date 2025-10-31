@@ -7,8 +7,8 @@ set -euo pipefail
 NUM_FILES=${NUM_FILES:-512}
 OUTPUT_DIR=${OUTPUT_DIR:-"$(pwd)/swift_outputs"}
 TEMPLATE_FILE=${TEMPLATE_FILE:-""}
-SDK_PATH=${SDK_PATH:-$(xcrun --sdk iphoneos --show-sdk-path)}
-TARGET=${TARGET:-"arm64-apple-ios15.0"}
+SDK_PATH=${SDK_PATH:-$(xcrun --sdk macosx --show-sdk-path)}
+TARGET=${TARGET:-"arm64-apple-macos15.0"}
 
 # Usage function
 usage() {
@@ -21,8 +21,8 @@ OPTIONS:
     -n, --num-files NUM      Number of Swift files to generate (default: 100)
     -o, --output-dir DIR     Output directory for Swift files and .o files (default: ./swift_outputs)
     -t, --template FILE      Path to Swift template file (optional, uses inline template if not provided)
-    -s, --sdk PATH           Path to SDK (default: iPhone SDK)
-    --target TRIPLE          Target triple (default: arm64-apple-ios15.0)
+    -s, --sdk PATH           Path to SDK (default: macOS SDK)
+    --target TRIPLE          Target triple (default: arm64-apple-macos15.0)
     -h, --help               Show this help message
 
 EXAMPLES:
@@ -36,7 +36,7 @@ EXAMPLES:
     $0 -t my_template.swift -n 200
 
     # Generate files and specify target
-    $0 --num-files 50 --target arm64-apple-ios16.0
+    $0 --num-files 50 --target arm64-apple-macos15.0
 EOF
     exit 0
 }

@@ -5,8 +5,8 @@ set -euo pipefail
 # Configuration
 MAIN_SOURCE=${MAIN_SOURCE:-"$(pwd)/main/main.swift"}
 OUTPUT_DIR=${OUTPUT_DIR:-"$(pwd)/main"}
-SDK_PATH=${SDK_PATH:-$(xcrun --sdk iphoneos --show-sdk-path)}
-TARGET=${TARGET:-"arm64-apple-ios15.0"}
+SDK_PATH=${SDK_PATH:-$(xcrun --sdk macosx --show-sdk-path)}
+TARGET=${TARGET:-"arm64-apple-macos15.0"}
 
 # Usage function
 usage() {
@@ -18,8 +18,8 @@ Compile the main.swift stub into main.o for linker testing.
 OPTIONS:
     -m, --main-source FILE   Path to main.swift (default: ./main/main.swift)
     -o, --output-dir DIR     Output directory for main.o (default: ./main)
-    -s, --sdk PATH           Path to SDK (default: iPhone SDK)
-    --target TRIPLE          Target triple (default: arm64-apple-ios15.0)
+    -s, --sdk PATH           Path to SDK (default: macOS SDK)
+    --target TRIPLE          Target triple (default: arm64-apple-macos15.0)
     -h, --help               Show this help message
 
 EXAMPLES:

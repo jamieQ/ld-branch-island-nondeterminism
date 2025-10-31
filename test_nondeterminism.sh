@@ -12,8 +12,8 @@ MAX_SWIFT_OBJECTS=${MAX_SWIFT_OBJECTS:-""}
 MAX_PADDING_OBJECTS=${MAX_PADDING_OBJECTS:-""}
 USE_LD_DIRECTLY=${USE_LD_DIRECTLY:-false}
 GENERATE_FILES=${GENERATE_FILES:-false}
-SDK_PATH=${SDK_PATH:-$(xcrun --sdk iphoneos --show-sdk-path)}
-TARGET=${TARGET:-"arm64-apple-ios15.0"}
+SDK_PATH=${SDK_PATH:-$(xcrun --sdk macosx --show-sdk-path)}
+TARGET=${TARGET:-"arm64-apple-macos15.0"}
 LINK_SCRIPT=${LINK_SCRIPT:-"$(pwd)/link_objects.sh"}
 GENERATE_SWIFT_SCRIPT=${GENERATE_SWIFT_SCRIPT:-"$(pwd)/generate_swift_files.sh"}
 GENERATE_PADDING_SCRIPT=${GENERATE_PADDING_SCRIPT:-"$(pwd)/generate_padding_files.sh"}
@@ -36,8 +36,8 @@ OPTIONS:
     --max-padding-objects NUM     Maximum number of padding objects to link (default: all)
     --use-ld                      Use ld directly instead of invoking through clang
     --generate                    Generate Swift files, padding files, and main.o before testing
-    --sdk PATH                    Path to SDK (default: iPhone SDK)
-    --target TRIPLE               Target triple (default: arm64-apple-ios15.0)
+    --sdk PATH                    Path to SDK (default: macOS SDK)
+    --target TRIPLE               Target triple (default: arm64-apple-macos15.0)
     --link-script PATH            Path to link_objects.sh script (default: ./link_objects.sh)
     -h, --help                    Show this help message
 

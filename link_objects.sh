@@ -11,8 +11,8 @@ OUTPUT_NAME=${OUTPUT_NAME:-"test_binary"}
 MAX_SWIFT_OBJECTS=${MAX_SWIFT_OBJECTS:-""}
 MAX_PADDING_OBJECTS=${MAX_PADDING_OBJECTS:-""}
 USE_LD_DIRECTLY=${USE_LD_DIRECTLY:-false}
-SDK_PATH=${SDK_PATH:-$(xcrun --sdk iphoneos --show-sdk-path)}
-TARGET=${TARGET:-"arm64-apple-ios15.0"}
+SDK_PATH=${SDK_PATH:-$(xcrun --sdk macosx --show-sdk-path)}
+TARGET=${TARGET:-"arm64-apple-macos15.0"}
 
 # Usage function
 usage() {
@@ -30,8 +30,8 @@ OPTIONS:
     --max-swift-objects NUM       Maximum number of Swift objects to link (default: all)
     --max-padding-objects NUM     Maximum number of padding objects to link (default: all)
     --use-ld                      Use ld directly instead of invoking through clang
-    --sdk PATH                    Path to SDK (default: iPhone SDK)
-    --target TRIPLE               Target triple (default: arm64-apple-ios15.0)
+    --sdk PATH                    Path to SDK (default: macOS SDK)
+    --target TRIPLE               Target triple (default: arm64-apple-macos15.0)
     -h, --help                    Show this help message
 
 EXAMPLES:
@@ -48,7 +48,7 @@ EXAMPLES:
     $0 --max-swift-objects 50
 
     # Specify target
-    $0 --target arm64-apple-ios16.0
+    $0 --target arm64-apple-macos15.0
 EOF
     exit 0
 }
@@ -115,7 +115,7 @@ link_objects_via_clang() {
     local object_files=("$@")
 
     # Get Swift library path from toolchain
-    local swift_lib_path=$(dirname $(xcrun --find swift))/../lib/swift/iphoneos
+    local swift_lib_path=$(dirname $(xcrun --find swift))/../lib/swift/macosx
 
     xcrun clang \
         "${object_files[@]}" \
@@ -141,14 +141,14 @@ link_objects_via_ld() {
     local object_files=("$@")
 
     # Get Swift library path from toolchain
-    local swift_lib_path=$(dirname $(xcrun --find swift))/../lib/swift/iphoneos
+    local swift_lib_path=$(dirname $(xcrun --find swift))/../lib/swift/macosx
 
     xcrun ld \
         "${object_files[@]}" \
         -o "$output_binary" \
         -arch arm64 \
         -syslibroot "$SDK_PATH" \
-        -platform_version ios 15.0 15.0 \
+        -platform_version macos 15.0 15.0 \
         -L"$swift_lib_path" \
         -rpath "$swift_lib_path" \
         -map "$map_file" \
