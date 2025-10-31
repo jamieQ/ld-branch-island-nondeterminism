@@ -1,6 +1,9 @@
 # ld-branch-island-nondeterminism
 Example of nondeterminism when linking large binaries
 
+Feedback #:
+FB20884404
+
 ### Instructions:
 
 From the root directory run:
@@ -15,7 +18,7 @@ This will do the following:
 2. Generate a number of 'filler' padding object files to force the resulting binary to be over the arm64 branch range limit (2 files of 64MB each by default).
 3. Generate a main entry point file.
 4. Repeatedly run clang to link the swift objects, then the filler padding objects, then the main.o file.
-5. Checks the resulting binaries & map files for nondeterministic results.
+5. Checks the resulting binaries & link map files for nondeterministic results.
 
 The results of repeated links after the initial object file generation
 suggest something related to the handling of branch island generation/placement
@@ -49,4 +52,9 @@ increase the number of links performed by specifying a 'run count' parameter:
 ./test_nondeterminism.sh -r 100
 ```
 
-The other scripts generally explain the options via help params.
+The other scripts generally explain the options via the --help option.
+
+---
+
+N.B. Most of the scripts here were generated via LLM use, so may contain
+errors or could potentially be improved.
