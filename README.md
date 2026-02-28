@@ -4,6 +4,9 @@ Example of nondeterminism when linking large binaries
 Feedback #:
 FB20884404
 
+> [!NOTE]
+> As of Xcode 26.4 beta 2 this issue appears it may be resolved. Thanks to those that fixed it!
+
 ### Instructions:
 
 From the root directory run:
